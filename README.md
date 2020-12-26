@@ -1,4 +1,12 @@
-# yplayer
+# player
+videos can be added one by one, for added videos, associated videos are automatically displayed under the player.
+
+
+# install
+windows required
+```
+npm install --global windows-build-tools
+```
 
 ## Project setup
 ```
@@ -7,13 +15,20 @@ npm install
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run electron:serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+npm run electron:build
 ```
 
+#will be added
+ * additional personal category
+ * sort videos
+ * other videos selected by filter selection
+
+------------------------------------------------------
+
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See [electronjs](https://www.electronjs.org/), [vuejs](https://cli.vuejs.org/config/) 
