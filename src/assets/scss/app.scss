@@ -1,0 +1,51 @@
+@import "animation";
+@import "scrollBar";
+html{
+  font-size: 15px;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+}
+*:hover, *:focus, *:active{
+  outline: none;
+  box-shadow: none !important;
+}
+.display-none{
+  display: none;
+}
+.hand{
+  cursor: pointer;
+}
+.help{
+  cursor: help;
+}
+.modal-content{
+  background-color: #000000;
+  .modal-header{
+    border-bottom: 1px solid #222222;
+  }
+  .modal-footer{
+    border-top: 1px solid #222222;
+  }
+}
+.dropdown{
+  .dropdown-menu{
+    background-color: #222222;
+    .dropdown-item{
+      color: #cccccc;
+      padding: 5px;
+      border-bottom: 1px solid #333333;
+      &:hover, &.active{
+        background-color: #333333;
+      }
+    }
+    li:last-child{
+      .dropdown-item{
+        border-bottom: none;
+      }
+    }
+  }
+}
