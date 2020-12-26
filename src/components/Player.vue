@@ -24,12 +24,17 @@
                 </div>
             </div>
 
-            <h3>downloadable audio</h3>
+            <h3>Downloadable</h3>
             <div class="d-flex flex-column">
                 <div class="d-flex flex-row align-items-center justify-content-between border-bottom py-2" v-for="item in downloadItems">
                     <div class="quality">{{ item.quality }}</div>
-                    <div class="quality-label">{{ item.qualityLabel }}</div>
+
+                    <div class="quality-label" v-if="item.qualityLabel">{{ item.qualityLabel }}</div>
+                    <div class="quality-label" v-else>--</div>
+
                     <div class="container-type">{{ item.container }}</div>
+                    <div class="container-type" :class="{'text-success':item.hasAudio, 'text-danger':!item.hasAudio}">Audio {{ item.hasAudio }}</div>
+                    <div class="container-type":class="{'text-success':item.hasVideo, 'text-danger':!item.hasVideo}">video {{ item.hasVideo }}</div>
                     <div class="download-link">
                         <a class="btn btn-dark text-nowrap text-left" @click="$root.externalOpen(item.url)"><b-icon icon="download"></b-icon> {{ $root.formatBytes(item.contentLength)}}</a>
                     </div>
@@ -94,7 +99,7 @@
                 }
             },
             downloadItems(){
-                return this.$root.videoData.hasAuido;
+                return this.$root.videoData.formats;
             }
         },
         methods:{

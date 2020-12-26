@@ -25,7 +25,7 @@ async function createWindow() {
         minWidth: 720,
         height: 600,
         minHeight: 480,
-        //frame: false,
+        frame: false,
         icon: iconAddress, //nativeImage.createFromPath(path.join(__dirname,'/assets/logo.png')),
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
