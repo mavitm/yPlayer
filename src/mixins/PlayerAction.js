@@ -66,7 +66,12 @@ const PlayerAction = {
             let that = this;
             that.currentVideoIndex = key;
             let d = that.$root.videoList[key];
-            that.playID(d.id, key);
+            if(typeof d === "undefined"){
+                return;
+            }
+            if(d.hasOwnProperty("id")){
+                that.playID(d.id, key);
+            }
             // this.$root.videoInfo({url:that.$root.getUrl(d.id)}).then(function (info) {
             //     that.videoData = info;
             //     that.videoLoading = false;

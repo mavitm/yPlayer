@@ -40,6 +40,7 @@
                     <b-icon icon="skip-forward"></b-icon>
                     <!-- <b-icon icon="arrow-clockwise" animation="spin" font-scale="1" v-if="nextButtonLoad"></b-icon>-->
                 </a>
+                <a class="btn btn-link mr-2" @click="$root.event.emit('view-video-info')"><b-icon icon="exclamation-circle"></b-icon></a>
             </b-navbar-nav>
         </b-collapse>
 
@@ -71,6 +72,14 @@
                 return false;
             },
             nextButtonLoad(){
+                return false;
+            },
+            hasInfo(){
+                try{
+                    if(this.$root.videoData.hasOwnProperty("id")){
+                        return true;
+                    }
+                }catch (e) {}
                 return false;
             }
         },

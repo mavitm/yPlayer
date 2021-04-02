@@ -6,47 +6,15 @@
         <div id="video-wrapper" class="text-right">
             <video :id="$root.playerID" :width="playerWidth" :height="playerHeight" :src="videoSrc" controls autoplay></video>
         </div>
-
-        <div class="video-info" v-if="viewInfo">
-            <a class="close" @click="hideVideoInfo()"><b-icon icon="x-square-fill"></b-icon></a>
-            <h1>{{ $root.videoData.fulltitle }}</h1>
-            <h3 class="mb-3">{{ $root.videoData.id }}</h3>
-            <p>{{ $root.videoData.full_description }}</p>
-            <div class="d-flex align-items-center justify-content-between video-property p-4">
-                <div class="published-date">
-                    <b-icon icon="calendar-date"></b-icon> {{ publishDate }}
-                </div>
-                <div class="view-count">
-                    <b-icon icon="eye"></b-icon> {{ viewCount }}
-                </div>
-                <div class="video-time">
-                    <b-icon icon="clock"></b-icon> {{ videoTime }}
-                </div>
-            </div>
-
-            <h3>Downloadable</h3>
-            <div class="d-flex flex-column">
-                <div class="d-flex flex-row align-items-center justify-content-between border-bottom py-2" v-for="item in downloadItems">
-                    <div class="quality">{{ item.quality }}</div>
-
-                    <div class="quality-label" v-if="item.qualityLabel">{{ item.qualityLabel }}</div>
-                    <div class="quality-label" v-else>--</div>
-
-                    <div class="container-type">{{ item.container }}</div>
-                    <div class="container-type" :class="{'text-success':item.hasAudio, 'text-danger':!item.hasAudio}">Audio {{ item.hasAudio }}</div>
-                    <div class="container-type":class="{'text-success':item.hasVideo, 'text-danger':!item.hasVideo}">video {{ item.hasVideo }}</div>
-                    <div class="download-link">
-                        <a class="btn btn-dark text-nowrap text-left" @click="$root.externalOpen(item.url)"><b-icon icon="download"></b-icon> {{ $root.formatBytes(item.contentLength)}}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <VideoInfo :viewInfo="viewInfo" />
     </div>
 </template>
 
 <script>
+    import VideoInfo from "./player/VideoInfo";
     export default {
         name: "Player",
+        components:{VideoInfo},
         data(){
             return {
                 sideBarWidth: 0,
@@ -75,31 +43,6 @@
             },
             videoSrc:function () {
                 return this.$root.videoData.url;
-            },
-            publishDate(){
-                try{
-                    return this.$root.videoData.player_response.microformat.playerMicroformatRenderer.publishDate;
-                }catch (e) {
-                    return 'undefined';
-                }
-            },
-            viewCount(){
-                try{
-                    return this.$root.videoData.player_response.microformat.playerMicroformatRenderer.viewCount;
-                }catch (e) {
-                    return 'undefined';
-                }
-            },
-            videoTime(){
-                try{
-                    let second = this.$root.videoData.player_response.microformat.playerMicroformatRenderer.lengthSeconds;
-                    return this.$root.formatMsTime(second * 1000);
-                }catch (e) {
-                    return 'undefined';
-                }
-            },
-            downloadItems(){
-                return this.$root.videoData.formats;
             }
         },
         methods:{
@@ -121,6 +64,9 @@
             this.$root.event.on('view-video-info',function () {
                 that.viewvideoInfo();
                 that.$root.event.emit("close_side_bar");
+            });
+            this.$root.event.on('view-video-info-close',function () {
+                that.hideVideoInfo();
             });
             document.addEventListener('keydown', function (event) {
                 if(event.key === "Escape"){
@@ -156,39 +102,6 @@
             animation-duration: 3s;
             animation-iteration-count: infinite;
             animation-timing-function: ease-in-out;
-        }
-    }
-    .video-info{
-        width: 100%;
-        max-width: 640px;
-        height: auto;
-        max-height: 80%;
-        position: absolute;
-        left: 50%;
-        top: 50px;
-        z-index: 1035;
-        transform: translate(-50%, 0);
-        background-color: #222222;
-        padding: 30px;
-        border: 1px solid #000000;
-        overflow-y: auto;
-        h1{
-            font-size: 30px;
-            font-weight: bold;
-        }
-        h3{
-            font-size: 22px;
-            color: #767676;
-        }
-        .video-property{
-            font-weight: bold;
-        }
-        .close{
-            position: absolute;
-            right: 0;
-            top: 0;
-            color: #e80020;
-            cursor: pointer;
         }
     }
 </style>
