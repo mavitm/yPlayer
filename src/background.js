@@ -55,6 +55,7 @@ async function createWindow() {
             info = await ytdl.getInfo(data.url);
             info = formatVideoInfo(info);
         }catch (e) {
+            console.log(e);
             info = {'error': true, message:'video not found'};
         }
         return info;
