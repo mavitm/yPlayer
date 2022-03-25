@@ -28,7 +28,7 @@
     "@vue/cli-plugin-router": "~4.5.9",
     "@vue/cli-plugin-vuex": "~4.5.9",
     "@vue/cli-service": "~4.5.9",
-    "electron": "^11.0.3",
+    "electron": "^13.6.6",
     "electron-devtools-installer": "^3.1.1",
     "electron-icon-builder": "^1.0.2",
     "sass": "^1.26.5",
